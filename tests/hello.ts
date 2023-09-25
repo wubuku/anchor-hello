@@ -35,8 +35,9 @@ describe("hello", () => {
     // Add your test here.
     const tx = await program.methods.initialize(
         new anchor.BN(1_234),
-        "hello",
-        ["foo", "bar"]
+        ["foo", "bar"],
+        ["hello", "world"],
+        "hello"
     ).accounts(
         {
            helloWorld,

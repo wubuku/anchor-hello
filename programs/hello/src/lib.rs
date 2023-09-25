@@ -16,12 +16,14 @@ pub mod hello {
     pub fn initialize(
         ctx: Context<Initialize>,
         arg_1: u128,
-        arg_2: String,
         arg_3: Vec<String>,
+        arg_4: Vec<String>,
+        arg_2: String,
     ) -> Result<()> {
         msg!("arg1: {}", arg_1);
         msg!("arg2: {}", arg_2);
         msg!("arg3: {}", arg_3.join("."));
+        msg!("arg4: {}", arg_4.join("."));
 
         *ctx.accounts.hello_world = HelloWorld {
             signer_address: *ctx.accounts.authority.key,
