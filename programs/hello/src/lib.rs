@@ -19,8 +19,8 @@ pub mod hello {
         *ctx.accounts.hello_world = HelloWorld {
             authority: *ctx.accounts.authority.key,
             data: arg_2,
-            //uint_1: arg_1,
-            //str_array_data: arg_3,
+            uint_1: arg_1,
+            str_array_data: arg_3,
         };
 
         emit!(MyEvent { data: 1 });
@@ -33,7 +33,7 @@ pub struct Initialize<'info> {
     #[account(
     init,
     payer = authority,
-    space = 8 + HelloWorld::INIT_SPACE,
+    space = 8 + 2000,
     seeds = [
       b"hello-world",
       authority.key().as_ref(),
@@ -41,6 +41,7 @@ pub struct Initialize<'info> {
     bump
     )]
     pub hello_world: Account<'info, HelloWorld>,
+    //space = 8 + HelloWorld::INIT_SPACE,
     //
     #[account(mut)]
     pub authority: Signer<'info>,
@@ -48,14 +49,14 @@ pub struct Initialize<'info> {
 }
 
 #[account]
-#[derive(InitSpace)]
+//#[derive(InitSpace)]
 pub struct HelloWorld {
     pub authority: Pubkey,
-    #[max_len(1000)]
-    pub data: String,
-    //pub uint_1: u128,
     //#[max_len(1000)]
-    //pub str_array_data: Vec<String>,
+    pub data: String,
+    pub uint_1: u128,
+    //#[len(1000)]
+    pub str_array_data: Vec<String>,
 }
 
 #[event]
