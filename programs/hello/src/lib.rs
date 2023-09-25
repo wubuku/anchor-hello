@@ -33,7 +33,7 @@ pub struct Initialize<'info> {
     #[account(
     init,
     payer = authority,
-    space = 8 + 2000,
+    space = 8 + HelloWorld::INIT_SPACE,
     seeds = [
       b"hello-world",
       authority.key().as_ref(),
@@ -41,7 +41,7 @@ pub struct Initialize<'info> {
     bump
     )]
     pub hello_world: Account<'info, HelloWorld>,
-    //space = 8 + HelloWorld::INIT_SPACE,
+    //
     //
     #[account(mut)]
     pub authority: Signer<'info>,
@@ -49,13 +49,13 @@ pub struct Initialize<'info> {
 }
 
 #[account]
-//#[derive(InitSpace)]
+#[derive(InitSpace)]
 pub struct HelloWorld {
     pub authority: Pubkey,
-    //#[max_len(1000)]
+    #[max_len(1000)]
     pub data: String,
     pub uint_1: u128,
-    //#[len(1000)]
+    #[max_len(100, 5)]
     pub str_array_data: Vec<String>,
 }
 
