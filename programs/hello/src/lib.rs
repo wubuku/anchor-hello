@@ -34,7 +34,10 @@ pub struct Initialize<'info> {
     init,
     payer = authority,
     space = 8 + HelloWorld::INIT_SPACE,
-    seeds = [b"hello-world"],
+    seeds = [
+      b"hello-world",
+      authority.key().as_ref(),
+    ],
     bump
     )]
     pub hello_world: Account<'info, HelloWorld>,
