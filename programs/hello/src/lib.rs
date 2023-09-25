@@ -24,13 +24,16 @@ pub mod hello {
         msg!("arg3: {}", arg_3.join("."));
 
         *ctx.accounts.hello_world = HelloWorld {
-            authority: *ctx.accounts.authority.key,
+            signer_address: *ctx.accounts.authority.key,
             data: arg_2,
             uint_1: arg_1,
             str_array_data: arg_3,
         };
+        msg!("ctx.accounts.authority.key: {}", *ctx.accounts.authority.key);
 
-        emit!(MyEvent { data: 1 });
+        emit!(Initialized {
+            signer_address: *ctx.accounts.authority.key
+        });
         Ok(())
     }
 }
